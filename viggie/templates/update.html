@@ -1,0 +1,27 @@
+{% extends "home.html" %}
+{% block body_block %}
+{% load static %}
+<div class="container mt-3 col-6 card p-3 shadow-lg">
+  <h3>Update Recipies</h3>
+  <form method="POST" enctype="multipart/form-data">
+  <div class="mb-3">
+    <hr>
+    <label for="exampleInputEmail1" class="form-label">Name</label>
+    <input type="text" class="form-control" name="receipe_name">
+
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Description</label>
+    <textarea class="form-control" name="receipe_description"></textarea>
+  </div>
+  <div class="mb-3">
+    <label for="img1" class="form-label">Image Source</label>
+    <input type="file" class="form-control" name="receipe_img">
+  </div>
+  <button type="submit" class="btn" style="background-color:grey">Update</button>
+{% csrf_token %}
+  </form>
+
+</div>
+
+{% endblock %}

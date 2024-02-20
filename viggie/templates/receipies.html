@@ -1,0 +1,66 @@
+{% extends "home.html" %}
+{% block body_block %}
+{% load static %}
+
+<h3>Welcome {{ request.user }}</h3>
+<div class="container mt-3 col-6 card p-3 shadow-lg">
+  <h3>My App</h3>
+  <form method="POST" enctype="multipart/form-data">
+  <div class="mb-3">
+    <hr>
+    <label for="exampleInputEmail1" class="form-label">Name</label>
+    <input type="text" class="form-control" name="receipe_name">
+
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Description</label>
+    <textarea class="form-control" name="receipe_description"></textarea>
+  </div>
+  <div class="mb-3">
+    <label for="img1" class="form-label">Image Source</label>
+    <input type="file" class="form-control" name="receipe_img">
+  </div>
+  <button type="submit" class="btn" style="background-color:grey">Submit</button>
+{% csrf_token %}
+  </form>
+
+</div>
+
+<div class="container mx-auto col-6 mt-3">
+<form>
+    <label class="form-label">Search</label>
+    <input type="search" class="form-control mb-3" name="search_field">
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+</div>
+
+
+<div class="container container mt-3">
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Image</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for x in rr %}
+    <tr>
+      <td>{{ forloop.counter }} </td>
+      <td>{{ x.receipe_name }} </td>
+      <td>{{ x.receipe_description }} </td>
+      <td><img src="/media/{{x.receipe_img}}"  alt="no img" style="Height:100px"></td>
+      <td><button class="btn btn-danger"><a href="/delete_item/{{x.id}}/">Delete</a></button></td>
+      <td><button class="btn btn-success"><a href="/update_item/{{x.id}}/">Update</a></button></td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+
+</div>
+
+
+{% endblock %}
